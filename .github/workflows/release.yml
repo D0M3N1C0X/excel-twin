@@ -1,0 +1,22 @@
+# Publishes to PyPI with trusted publishing (no token stored in the repository).
+# One-time setup on pypi.org: add a pending publisher for project "excel-twin", owner D0M3N1C0X,
+# repository excel-twin, workflow release.yml, environment pypi. Then run this workflow by hand.
+name: release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  pypi:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install build
+      - run: python -m build
+      - uses: pypa/gh-action-pypi-publish@release/v1

@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "excel-twin"
+version = "0.1.0"
+description = "Prove that a spreadsheet's live formulas reproduce a Python model: reconciliation checks, LibreOffice recalculation, Excel-exact evaluation in Python, byte-stable .xlsx files."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{ name = "Domenico Perroni" }]
+keywords = ["excel", "openpyxl", "reconciliation", "spreadsheet", "testing", "libreoffice", "reproducibility"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Topic :: Office/Business :: Financial :: Spreadsheet",
+  "Topic :: Software Development :: Testing",
+]
+dependencies = ["openpyxl>=3.1"]
+
+[project.optional-dependencies]
+formulas = ["formulas>=1.2"]
+test = ["pytest>=8", "formulas>=1.2"]
+
+[project.scripts]
+excel-twin = "excel_twin.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/D0M3N1C0X/excel-twin"
+
+[tool.setuptools.packages.find]
+where = ["src"]
