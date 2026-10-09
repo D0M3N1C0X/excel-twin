@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "excel-twin"
-version = "0.1.0"
+version = "0.1.1"
 description = "Prove that a spreadsheet's live formulas reproduce a Python model: reconciliation checks, LibreOffice recalculation, Excel-exact evaluation in Python, byte-stable .xlsx files."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -16,12 +16,14 @@ classifiers = [
   "Operating System :: OS Independent",
   "Topic :: Office/Business :: Financial :: Spreadsheet",
   "Topic :: Software Development :: Testing",
+  "Typing :: Typed",
 ]
 dependencies = ["openpyxl>=3.1"]
 
 [project.optional-dependencies]
 formulas = ["formulas>=1.2"]
-test = ["pytest>=8", "formulas>=1.2"]
+test = ["pytest>=8", "pytest-cov>=7", "formulas>=1.2"]
+lint = ["ruff==0.16.10", "mypy==2.4.0", "types-openpyxl"]
 
 [project.scripts]
 excel-twin = "excel_twin.cli:main"
@@ -31,3 +33,32 @@ Homepage = "https://github.com/D0M3N1C0X/excel-twin"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+excel_twin = ["py.typed"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+# A library: every function in src/ is fully typed (ANN), and mypy runs in strict mode in CI.
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "ANN"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ANN"]
+
+[tool.mypy]
+strict = true
+files = ["src/excel_twin"]
+
+[[tool.mypy.overrides]]
+module = ["formulas", "formulas.*"]
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["excel_twin"]
+
+[tool.coverage.report]
+show_missing = true

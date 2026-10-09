@@ -13,8 +13,8 @@ match while no cell holds a formula error.
 """
 from .determinism import differences, normalise, same_content
 from .evaluate import excel_round, values_from_formulas, values_from_saved
-from .reconcile import ERRORS, Layout, Report, check, count_checks
+from .reconcile import ERRORS, Layout, Report, Values, check, count_checks, labelled_rows
 
-__all__ = ["ERRORS", "Layout", "Report", "check", "count_checks", "differences", "excel_round", "normalise",
-           "same_content", "values_from_formulas", "values_from_saved"]
-__version__ = "0.1.0"
+__all__ = ["ERRORS", "Layout", "Report", "Values", "check", "count_checks", "differences", "excel_round",
+           "labelled_rows", "normalise", "same_content", "values_from_formulas", "values_from_saved"]
+__version__ = "0.1.1"

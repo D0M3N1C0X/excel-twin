@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+src/excel_twin/__init__.py
+src/excel_twin/cli.py
+src/excel_twin/determinism.py
+src/excel_twin/evaluate.py
+src/excel_twin/py.typed
+src/excel_twin/recalc.py
+src/excel_twin/reconcile.py
+src/excel_twin.egg-info/PKG-INFO
+src/excel_twin.egg-info/SOURCES.txt
+src/excel_twin.egg-info/dependency_links.txt
+src/excel_twin.egg-info/entry_points.txt
+src/excel_twin.egg-info/requires.txt
+src/excel_twin.egg-info/top_level.txt
+tests/test_excel_twin.py

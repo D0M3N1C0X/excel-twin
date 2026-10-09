@@ -42,7 +42,7 @@ will open. Found in a payroll model where it moved three totals by one cent.
 ## Use
 
 ```bash
-pip install "excel-twin[formulas] @ git+https://github.com/D0M3N1C0X/excel-twin@v0.1.0"
+pip install "excel-twin[formulas] @ git+https://github.com/D0M3N1C0X/excel-twin@v0.1.1"
 ```
 
 ```python
@@ -69,6 +69,15 @@ excel-twin same-as-git deliverables/model.xlsx           # rebuilt file has the 
 [equal-value-pay-ranges](https://github.com/D0M3N1C0X/equal-value-pay-ranges) ·
 [controlli-cedolini](https://github.com/D0M3N1C0X/controlli-cedolini) ·
 [vimeo-growth-case](https://github.com/D0M3N1C0X/vimeo-growth-case)
+
+## Development
+
+```bash
+pip install -e ".[test,lint]"
+pytest --cov       # coverage is also reported in each CI run
+ruff check .       # style and likely bugs
+mypy               # strict types; the package ships a py.typed marker
+```
 
 ## Limits
 

@@ -9,7 +9,7 @@ from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
 
-def excel_round(x, d):
+def excel_round(x: float, d: int) -> float:
     """Excel's ROUND: the value is first cut to 15 significant digits, then rounded half away from zero,
     so ROUND(34.245, 2) is 34.25. `formulas` multiplies the float by 100 and gets 3424.4999..., which
     gives 34.24 on every half-cent tie; Excel and LibreOffice agree with this version."""
@@ -22,7 +22,7 @@ def excel_round(x, d):
 def values_from_saved(path: Path) -> dict[tuple[str, str], object]:
     from openpyxl import load_workbook
     wb = load_workbook(path, data_only=True, read_only=True)
-    out = {}
+    out: dict[tuple[str, str], object] = {}
     for ws in wb.worksheets:
         for row in ws.iter_rows():
             for cell in row:

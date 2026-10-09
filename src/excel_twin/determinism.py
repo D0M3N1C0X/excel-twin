@@ -41,7 +41,7 @@ def normalise(path: Path) -> None:
     path.write_bytes(_normalised(path.read_bytes()))
 
 
-def _entries(blob: bytes) -> dict:
+def _entries(blob: bytes) -> dict[str, object]:
     with zipfile.ZipFile(BytesIO(blob)) as z:
         return {n: (_entries(z.read(n)) if n.endswith(OFFICE) else z.read(n)) for n in z.namelist()}
 

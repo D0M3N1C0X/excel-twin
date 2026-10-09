@@ -6,6 +6,18 @@ on:
   workflow_dispatch:
 
 jobs:
+  lint:
+    # Style and likely bugs (ruff), and strict types (mypy); settings in pyproject.toml.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ".[lint]"
+      - run: ruff check .
+      - run: mypy
+
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -18,7 +30,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
       - run: pip install ".[test]"
-      - run: pytest -q
+      - run: pytest -q --cov --cov-report=term
+      - name: Coverage in the run summary
+        if: matrix.python-version == '3.12'
+        run: coverage report --format=markdown >> "$GITHUB_STEP_SUMMARY"
 
   libreoffice:
     # the recalculation path, against a real spreadsheet engine

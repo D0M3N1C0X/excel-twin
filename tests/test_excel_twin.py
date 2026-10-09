@@ -44,6 +44,15 @@ def test_an_empty_reconciliation_is_not_a_pass():
     assert not et.check({}, 0).ok
 
 
+def test_a_blank_row_inside_the_sheet_is_skipped_unless_rows_are_counted():
+    s = "RECONCILIATION"
+    values = {(s, "B7"): "first", (s, "G7"): "Yes", (s, "B9"): "second", (s, "G9"): "Yes"}
+    report = et.check(values)
+    assert report.ok and report.checks == 2
+    # told to expect three consecutive rows, the build is missing one: that must fail
+    assert not et.check(values, 3).ok
+
+
 def test_layout_is_configurable(make):
     path, _ = make()
     values = et.values_from_formulas(path)
@@ -80,3 +89,29 @@ def test_libreoffice_recalculates_and_agrees(make, tmp_path):
     out = recalc(path, tmp_path / "out")
     report = et.check(et.values_from_saved(out))
     assert report.ok and report.checks == n
+
+
+def test_values_from_saved_reads_stored_cells_only(make):
+    path, _ = make()
+    values = et.values_from_saved(path)
+    assert values[("MODEL", "B1")] == 22.83 and values[("RECONCILIATION", "B7")] == "Revenue"
+    assert ("MODEL", "B3") not in values          # never calculated by a spreadsheet engine: no stored value
+
+
+def test_check_against_git_flags_a_changed_rebuild(make, tmp_path, monkeypatch):
+    import subprocess
+
+    from conftest import build
+    if shutil.which("git") is None:
+        pytest.skip("git not installed")
+    path, _ = make()
+    monkeypatch.chdir(tmp_path)
+    git = ["git", "-c", "user.name=t", "-c", "user.email=t@example.com"]
+    subprocess.run([*git, "init", "-q"], check=True)
+    subprocess.run([*git, "add", path.name], check=True)
+    subprocess.run([*git, "commit", "-q", "-m", "workbook"], check=True)
+    build(path)                                   # the same build again: same content
+    assert et.determinism.check_against_git([path.name]) == 0
+    build(path, python_values={"Revenue": 34.26})  # a different build
+    assert et.determinism.check_against_git([path.name]) == 1
+
