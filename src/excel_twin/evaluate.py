@@ -13,8 +13,10 @@ def excel_round(x: float, d: int) -> float:
     """Excel's ROUND: the value is first cut to 15 significant digits, then rounded half away from zero,
     so ROUND(34.245, 2) is 34.25. `formulas` multiplies the float by 100 and gets 3424.4999..., which
     gives 34.24 on every half-cent tie; Excel and LibreOffice agree with this version."""
-    v = Decimal(f"{float(x):.15g}").quantize(Decimal(1).scaleb(-int(d)), rounding=ROUND_HALF_UP)
-    return float(v)
+    v = Decimal(f"{float(x):.15g}")
+    if v.adjusted() + int(d) >= 28:          # more digits than Decimal's context keeps: nothing left to round
+        return float(x)
+    return float(v.quantize(Decimal(1).scaleb(-int(d)), rounding=ROUND_HALF_UP))
 
 
 

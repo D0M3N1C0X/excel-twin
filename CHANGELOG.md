@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.2 — 2026-10-23
+
+- `excel_round` returns the value unchanged when it has more digits than can be rounded (`excel_round(1e20, 10)`
+  raised before).
+- Packaging: setuptools 77 or later (the licence is an SPDX string, PEP 639); classifiers for Python 3.12-3.14,
+  status and audience.
+- The release workflow runs the tests, checks that a tag matches the version and runs `twine check` before
+  publishing.
+
 ## 0.1.1 — 2026-10-09
 
 - `check` without `n_checks` now checks exactly the labelled rows of the Reconciliation sheet, so a blank

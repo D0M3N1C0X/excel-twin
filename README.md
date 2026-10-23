@@ -42,7 +42,7 @@ will open. Found in a payroll model where it moved three totals by one cent.
 ## Use
 
 ```bash
-pip install "excel-twin[formulas] @ git+https://github.com/D0M3N1C0X/excel-twin@v0.1.1"
+pip install "excel-twin[formulas] @ git+https://github.com/D0M3N1C0X/excel-twin@v0.1.2"
 ```
 
 ```python

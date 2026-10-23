@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=69"]
+requires = ["setuptools>=77"]          # PEP 639: license as an SPDX string
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "excel-twin"
-version = "0.1.1"
+version = "0.1.2"
 description = "Prove that a spreadsheet's live formulas reproduce a Python model: reconciliation checks, LibreOffice recalculation, Excel-exact evaluation in Python, byte-stable .xlsx files."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -12,7 +12,13 @@ license = "MIT"
 authors = [{ name = "Domenico Perroni" }]
 keywords = ["excel", "openpyxl", "reconciliation", "spreadsheet", "testing", "libreoffice", "reproducibility"]
 classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Financial and Insurance Industry",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Operating System :: OS Independent",
   "Topic :: Office/Business :: Financial :: Spreadsheet",
   "Topic :: Software Development :: Testing",

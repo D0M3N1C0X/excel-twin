@@ -17,4 +17,4 @@ from .reconcile import ERRORS, Layout, Report, Values, check, count_checks, labe
 
 __all__ = ["ERRORS", "Layout", "Report", "Values", "check", "count_checks", "differences", "excel_round",
            "labelled_rows", "normalise", "same_content", "values_from_formulas", "values_from_saved"]
-__version__ = "0.1.1"
+__version__ = "0.1.2"

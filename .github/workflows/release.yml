@@ -17,6 +17,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install build
+      - name: Tests pass before anything is published
+        run: pip install -e ".[test]" && pytest -q
+      - name: The tag, if any, matches the version
+        run: |
+          v=$(python -c "import excel_twin; print(excel_twin.__version__)")
+          if [[ "$GITHUB_REF" == refs/tags/* && "${GITHUB_REF#refs/tags/v}" != "$v" ]]; then
+            echo "::error::tag ${GITHUB_REF#refs/tags/} does not match version $v"; exit 1
+          fi
+      - run: pip install build twine
       - run: python -m build
+      - name: The packages are valid
+        run: twine check --strict dist/*
       - uses: pypa/gh-action-pypi-publish@release/v1
