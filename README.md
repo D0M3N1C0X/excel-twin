@@ -1,6 +1,6 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/D0M3N1C0X/excel-twin/main/site-assets/cover-dark.png">
-  <img alt="excel-twin: prove the spreadsheet matches the model. Five analysis repositories reconcile through it, 3,134 figures checked between Python and Excel." src="https://raw.githubusercontent.com/D0M3N1C0X/excel-twin/main/site-assets/cover-light.png">
+  <img alt="excel-twin: prove the spreadsheet matches the model. Five analysis repositories reconcile through it, 3,185 figures checked between Python and Excel." src="https://raw.githubusercontent.com/D0M3N1C0X/excel-twin/main/site-assets/cover-light.png">
 </picture>
 
 <p align="center">
@@ -23,7 +23,7 @@ Finance and HR teams receive models as Excel workbooks, because that is the file
 When the analysis behind it was built in pandas, the two engines can drift apart: a formula typed once and never
 checked, a rounding rule that differs, a range that stops one row short. Nobody notices until a number in a board
 pack is wrong. **excel-twin makes the workbook prove it agrees with the model**, figure by figure, on every change.
-It is the small toolkit behind the reconciliation in five of my analysis repositories (3,134 figures checked in all),
+It is the small toolkit behind the reconciliation in five of my analysis repositories (3,185 figures checked in all),
 extracted so each one tests the same way.
 
 ## The idea
